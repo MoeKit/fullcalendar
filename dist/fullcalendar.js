@@ -7,8 +7,9 @@
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
 		define([ 'jquery', 'moment' ], factory);
-	}
-	else {
+	} else if (module && module.exports) {
+        factory(require('jquery'), require('moment'));
+    } else {
 		factory(jQuery, moment);
 	}
 })(function($, moment) {
@@ -1076,6 +1077,11 @@ function Calendar(element, instanceOptions) {
 }
 
 ;;
+
+// CMD wrapper
+if(module && module.exports){
+    module.exports = Calendar;
+}
 
 function Header(calendar, options) {
 	var t = this;
